@@ -1,5 +1,12 @@
 use master;
 go
+
+if exists (select 1 from sys.databases where name = 'datawarehouse')
+begin
+	alter database set single_user with rollback immediate;
+	drop database datawarehouse
+end;
+go
 create database datawarehouse;
 go
 use datawarehouse;
