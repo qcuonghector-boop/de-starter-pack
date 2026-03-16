@@ -45,9 +45,9 @@ if object_id('bronze.erp_cust_az12', 'U') is not null
 	drop table bronze.erp_cust_az12;
 create table bronze.erp_cust_az12
 (
-CID nvarchar(50)
-, BDATE date
-, GEN nvarchar(10)
+cid nvarchar(50)
+, bdate date
+, gen nvarchar(10)
 );
 
 
@@ -55,8 +55,8 @@ if object_id('bronze.erp_loc_a101', 'U') is not null
 	drop table bronze.erp_loc_a101;
 create table bronze.erp_loc_a101
 (
-CID nvarchar(50)
-, CNTRY nvarchar(50)
+cid nvarchar(50)
+, cntry nvarchar(50)
 );
 
 
@@ -64,8 +64,8 @@ if object_id('bronze.erp_pxcat_g1v2', 'U') is not null
 	drop table bronze.erp_pxcat_g1v2;
 create table bronze.erp_pxcat_g1v2
 (
-ID nvarchar(20)
-, CAT nvarchar(50)
-, SUBCAT nvarchar(50)
-, MAINTENANCE nvarchar(10)
+id nvarchar(20)
+, cat nvarchar(50)
+, subcat nvarchar(50)
+, maintenance nvarchar(10)
 );
