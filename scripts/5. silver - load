@@ -1,4 +1,3 @@
--- first table: silver.crm_cust_info
 
 truncate table silver.crm_cust_info;
 insert into silver.crm_cust_info
@@ -85,8 +84,8 @@ from bronze.crm_prd_info
 ;
 
 if object_id('silver.crm_sales_details', 'U') is not null
-	drop table silver.crm_prd_info;
-create table silver.crm_prd_info
+	drop table silver.crm_sales_details;
+create table silver.crm_sales_details
 	(
 	sls_ord_num nvarchar(50)
 	, sls_prd_key nvarchar(50)
@@ -141,3 +140,66 @@ select
 		else sls_price
 		end as sls_price
 from bronze.crm_sales_details
+
+;
+
+
+truncate table silver.erp_cust_az12; 
+insert into silver.erp_cust_az12
+	(
+	cid
+	, bdate
+	, gen
+	)
+select
+	case
+		when cid like 'NAS%' then substring(cid, 4)
+		else cid
+		end as cid
+	, case
+		when bdate > getdate() then null
+		else bdate
+		end as bdate
+	, case
+		when upper(trim(gen)) in ('F', 'FEMALE') then 'Female'
+		when upper(trim(gen)) in ('M', 'MALE') then 'Male'
+		else 'n/a'
+		end as gen
+from bronze.erp_cust_az12
+
+;
+
+truncate table silver.erp_loc_a101; 
+insert into silver.erp_loc_a101
+	(
+	cid
+	, cntry
+	)
+select
+	replace(cid, '-', '') as cid
+	, case
+		when trim(cntry) = 'DE' then 'Germany'
+		when trim(cntry) in ('USA', 'US') then 'United States'
+		when trim(cntry) is null or trim(cntry) = '' then 'n/a'
+		else cntry
+		end as cntry
+from bronze.erp_loc_a101
+
+
+;
+
+truncate table silver.erp_pxcat_g1v2;
+insert into silver.erp_pxcat_g1v2
+	(
+	id
+	, cat
+	, subcat
+	, maintenance
+	)
+select
+	id
+	, cat
+	, subcat
+	, maintenance
+from bronze.erp_pxcat_g1v2
+
