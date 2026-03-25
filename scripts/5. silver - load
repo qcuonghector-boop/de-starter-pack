@@ -73,7 +73,7 @@ begin
 		, prd_nm
 		, isnull(prd_cost, 0) as prd_cost
 		, case 
-			when upper(trim(prd_line)) = 'M' then 'Moutain'
+			when upper(trim(prd_line)) = 'M' then 'Mountain'
 			when upper(trim(prd_line)) = 'R' then 'Road'
 			when upper(trim(prd_line)) = 'T' then 'Touring'
 			when upper(trim(prd_line)) = 'S' then 'Other Sales'
